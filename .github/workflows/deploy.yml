@@ -23,28 +23,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       # Detects repository base path (e.g. /wedding-letter for project pages)
       # and sets outputs.base_path / outputs.base_url used below
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Build static site
-        run: node build.js
-        env:
-          # Pass the subdirectory prefix so asset paths are correct
-          # e.g. /wedding-letter  — empty string for custom domain / org page
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/
+          # Upload toàn bộ thư mục gốc (chỉ chứa static files)
+          path: '.'
 
   deploy:
     needs: build
