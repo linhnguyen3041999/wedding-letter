@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Scarlet Bradley.regular';
+  src: url('https://assets.cinelove.me/fonts/webfonts/scarlet-bradleyregular/scarlet-bradleyregular.woff2') format('woff2'),
+       url('https://assets.cinelove.me/fonts/webfonts/scarlet-bradleyregular/scarlet-bradleyregular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
