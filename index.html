@@ -559,34 +559,64 @@ a { text-decoration: none; color: inherit; }
   background: var(--white);
   border-top: 1px solid var(--border);
 }
-.gallery-inner { padding: 52px 14px; }
-.gallery-top { text-align: center; margin-bottom: 1.8rem; }
+.gallery-inner { padding: 52px 16px; }
+.gallery-top { text-align: center; margin-bottom: 2rem; }
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
 }
 .g-item {
   position: relative; overflow: hidden;
-  border-radius: 5px; cursor: pointer;
+  border-radius: 10px; cursor: pointer;
+  background: var(--border);
 }
 .g-item img {
-  width: 100%; aspect-ratio: 1;
+  width: 100%; height: 100%; aspect-ratio: 1;
   object-fit: cover;
-  transition: transform .45s ease;
+  transition: transform .55s cubic-bezier(.25,.46,.45,.94);
   display: block;
 }
-.g-item:hover img { transform: scale(1.08); }
+.g-item:hover img { transform: scale(1.07); }
 .g-item.wide { grid-column: span 2; }
-.g-item.wide img { aspect-ratio: 2/1; }
+.g-item.wide img { aspect-ratio: 16/9; }
 .g-overlay {
   position: absolute; inset: 0;
-  background: rgba(90,21,32,.38);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .3s;
+  background: linear-gradient(to top, rgba(70,15,25,.55) 0%, transparent 55%);
+  opacity: 0; transition: opacity .35s;
+  display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 10px;
 }
 .g-item:hover .g-overlay { opacity: 1; }
-.g-overlay svg { width: 26px; fill: white; }
+.g-overlay svg { width: 20px; fill: white; opacity: .85; }
+
+/* Gallery expand */
+.gallery-more-wrap {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .9s cubic-bezier(.4,0,.2,1);
+  margin-top: 7px;
+}
+.gallery-more-wrap.open { grid-template-rows: 1fr; }
+.gallery-more-inner { min-height: 0; }
+.gallery-more .g-item {
+  opacity: 0;
+  transform: translateY(18px) scale(.96);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.gallery-more .g-item.revealed { opacity: 1; transform: none; }
+.gallery-more-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin-top: 1.8rem;
+  padding: .72rem 2.2rem;
+  border: 1.5px solid var(--wine); border-radius: 50px;
+  background: transparent; color: var(--wine);
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+  cursor: pointer; transition: background .25s, color .25s;
+}
+.gallery-more-btn:hover { background: var(--wine); color: white; }
 
 /* lightbox */
 #lightbox {
@@ -1003,8 +1033,9 @@ footer {
         <h2 class="sec-title">Kỷ Niệm</h2>
         <span class="gold-line"></span>
       </div>
-      <div class="gallery-grid reveal" style="transition-delay:.1s">
 
+      <!-- 4 ảnh đầu luôn hiển thị -->
+      <div class="gallery-grid reveal" style="transition-delay:.1s">
         <div class="g-item wide" onclick="openLb(0)">
           <img src="images/LD3_6965.JPG" alt="" loading="lazy" />
           <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
@@ -1017,63 +1048,77 @@ footer {
           <img src="images/LD3_7303.JPG" alt="" loading="lazy" />
           <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
         </div>
-        <div class="g-item" onclick="openLb(3)">
+        <div class="g-item wide" onclick="openLb(3)">
           <img src="images/LD3_7330.JPG" alt="" loading="lazy" />
           <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
         </div>
-        <div class="g-item wide" onclick="openLb(4)">
-          <img src="images/LD3_7480.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(5)">
-          <img src="images/LD3_7514.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(6)">
-          <img src="images/LD3_7626.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(7)">
-          <img src="images/LD3_7676.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item wide" onclick="openLb(8)">
-          <img src="images/LD3_7766.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(9)">
-          <img src="images/LD3_7844.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(10)">
-          <img src="images/LD3_7977.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(11)">
-          <img src="images/LD3_7994.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item wide" onclick="openLb(12)">
-          <img src="images/LD3_8012.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(13)">
-          <img src="images/LD3_8034.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(14)">
-          <img src="images/LD3_8235.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item" onclick="openLb(15)">
-          <img src="images/LD3_8257.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
-        <div class="g-item wide" onclick="openLb(16)">
-          <img src="images/LD3_8336.JPG" alt="" loading="lazy" />
-          <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
-        </div>
+      </div>
 
+      <!-- 13 ảnh còn lại – thu gọn -->
+      <div class="gallery-more-wrap" id="gallery-more-wrap">
+        <div class="gallery-more-inner">
+          <div class="gallery-grid gallery-more" id="gallery-more">
+            <div class="g-item wide" onclick="openLb(4)">
+              <img src="images/LD3_7480.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(5)">
+              <img src="images/LD3_7514.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(6)">
+              <img src="images/LD3_7626.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item wide" onclick="openLb(7)">
+              <img src="images/LD3_7676.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(8)">
+              <img src="images/LD3_7766.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(9)">
+              <img src="images/LD3_7844.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item wide" onclick="openLb(10)">
+              <img src="images/LD3_7977.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(11)">
+              <img src="images/LD3_7994.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(12)">
+              <img src="images/LD3_8012.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item wide" onclick="openLb(13)">
+              <img src="images/LD3_8034.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(14)">
+              <img src="images/LD3_8235.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item" onclick="openLb(15)">
+              <img src="images/LD3_8257.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+            <div class="g-item wide" onclick="openLb(16)">
+              <img src="images/LD3_8336.JPG" alt="" loading="lazy" />
+              <div class="g-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center">
+        <button class="gallery-more-btn" id="gallery-more-btn" onclick="toggleGalleryMore()">
+          Xem thêm 13 ảnh
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" id="gallery-btn-arrow" style="transition:transform .3s"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -1336,6 +1381,34 @@ function submitRSVP(e) {
 function showSuccess() {
   document.getElementById('rsvp-form').style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
+}
+
+/* ── GALLERY TOGGLE ── */
+function toggleGalleryMore() {
+  const wrap  = document.getElementById('gallery-more-wrap');
+  const btn   = document.getElementById('gallery-more-btn');
+  const arrow = document.getElementById('gallery-btn-arrow');
+  const items = document.querySelectorAll('#gallery-more .g-item');
+  const isOpen = wrap.classList.contains('open');
+
+  if (isOpen) {
+    items.forEach(el => el.classList.remove('revealed'));
+    wrap.classList.remove('open');
+    arrow.style.transform = '';
+    btn.childNodes[0].textContent = 'Xem thêm 13 ảnh ';
+    wrap.addEventListener('transitionend', () => {
+      if (!wrap.classList.contains('open')) {
+        wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, { once: true });
+  } else {
+    wrap.classList.add('open');
+    arrow.style.transform = 'rotate(180deg)';
+    btn.childNodes[0].textContent = 'Thu gọn ';
+    items.forEach((el, i) => {
+      setTimeout(() => el.classList.add('revealed'), 120 + i * 55);
+    });
+  }
 }
 
 /* ── LIGHTBOX ── */
