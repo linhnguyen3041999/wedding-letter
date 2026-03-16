@@ -316,7 +316,9 @@ a { text-decoration: none; color: inherit; }
   font-size: clamp(1.5rem, 5.5vw, 2.1rem);
   color: var(--text); font-weight: 400;
   letter-spacing: .04em; line-height: 1;
+  margin-bottom: 5px;
 }
+
 .e-small {
   font-family: 'Montserrat', sans-serif;
   font-size: .56rem; letter-spacing: .14em; text-transform: uppercase;
@@ -332,6 +334,7 @@ a { text-decoration: none; color: inherit; }
   font-size: clamp(2.6rem, 9vw, 3.6rem);
   font-weight: 800; color: var(--text);
   line-height: .95; letter-spacing: -.02em;
+  margin-bottom: 15px;
 }
 .e-month {
   font-family: 'Playfair Display', serif;
@@ -465,21 +468,21 @@ a { text-decoration: none; color: inherit; }
 #couple {
   background: var(--white);
   border-top: 1px solid var(--border);
-  padding: 52px 24px;
+  padding: 25px 24px;
   text-align: center;
 }
 .couple-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 12px; align-items: start;
+  gap: 14px; align-items: start;
   margin-top: 2.4rem;
 }
 .couple-card { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
 .cp-photo {
-  width: 115px; height: 155px;
+  width: 132px; height: 182px;
   border: 3px solid white;
   box-shadow: 0 4px 22px rgba(123,32,48,.15);
-  border-radius: 58px;
+  border-radius: 66px;
   overflow: hidden;
 }
 .cp-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
@@ -493,15 +496,10 @@ a { text-decoration: none; color: inherit; }
   font-size: .56rem; letter-spacing: .18em; text-transform: uppercase;
   color: var(--wine); opacity: .7;
 }
-.cp-family {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: .75rem; color: var(--text-light);
-  line-height: 1.7; text-align: center;
-}
 .couple-div {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 8px; padding-top: 52px;
+  gap: 8px; padding-top: 42px;
 }
 .c-line { width: 1px; height: 44px; background: linear-gradient(180deg, transparent, #D8BEBE, transparent); }
 .c-heart { font-size: 1.5rem; color: var(--wine); animation: hb 1.7s ease-in-out infinite; }
@@ -884,7 +882,7 @@ footer {
       <p class="event-vao-luc">Vào lúc</p>
       <div class="event-row">
         <div class="e-col">
-          <span class="e-time">11:00</span>
+          <span class="e-time">11:30</span>
           <span class="e-small">Giờ</span>
         </div>
         <div class="e-vbar"></div>
@@ -983,7 +981,6 @@ footer {
         </div>
         <span class="cp-name">Nhật Linh</span>
         <span class="cp-role">Chú Rể</span>
-        <p class="cp-family">ông Nguyễn Tùng Giang<br/>bà Nguyễn Thúy Hằng</p>
       </div>
       <div class="couple-div">
         <div class="c-line"></div>
@@ -996,7 +993,6 @@ footer {
         </div>
         <span class="cp-name">Diễm Phúc</span>
         <span class="cp-role">Cô Dâu</span>
-        <p class="cp-family">ông Nguyễn Văn Dẫn<br/>bà Phạm Thị Tú Loan</p>
       </div>
     </div>
   </section>
@@ -1010,9 +1006,9 @@ footer {
     </div>
     <img class="story-photo reveal" style="transition-delay:.1s" src="images/LD3_7676.JPG" alt="Ảnh đôi" loading="lazy" />
     <blockquote class="story-quote reveal" style="transition-delay:.16s">
-      Trái tim em, tựa cánh chim nhỏ giữa đồng hoang,<br/>
+      Trái tim anh, tựa cánh chim nhỏ giữa đồng hoang,<br/>
       đã tìm thấy bầu trời của riêng mình<br/>
-      trong đôi mắt anh.
+      trong đôi mắt em.
     </blockquote>
     <p class="story-eng reveal" style="transition-delay:.22s">
       My heart, the bird of the wilderness, has found its sky in your eyes.
@@ -1184,8 +1180,8 @@ footer {
           <select id="r-pickup">
             <option value="none">— Mình sẽ tự di chuyển —</option>
             <option value="hang_xanh">Ngã tư Hàng Xanh</option>
-            <option value="dhxhnv">Đại Học Xã Hội và Nhân Văn</option>
-            <option value="victoria">Trường Victoria</option>
+            <option value="dhxhnv">Đại Học Xã Hội và Nhân Văn Quận 1</option>
+            <option value="lotte">LOTTE Mart Quận 7</option>
           </select>
         </div>
         <div class="form-group">
