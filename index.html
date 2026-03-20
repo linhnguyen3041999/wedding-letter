@@ -1163,6 +1163,10 @@ footer {
           <input type="text" id="r-name" placeholder="Nguyễn Văn A" required autocomplete="name" />
         </div>
         <div class="form-group">
+          <label for="r-phone">Số điện thoại</label>
+          <input type="tel" id="r-phone" placeholder="09xxxxxxxx" required autocomplete="tel" />
+        </div>
+        <div class="form-group">
           <label>Bạn sẽ tham dự chứ?</label>
           <div class="radio-group" id="attend-group">
             <label class="radio-label" onclick="selectAttend(this,'yes')">
@@ -1333,18 +1337,21 @@ function slugVi(str) {
  * Dán URL Google Apps Script của bạn vào đây sau khi deploy.
  * Hướng dẫn: xem README hoặc comment bên dưới hàm submitRSVP.
  * ─────────────────────────────────────────────────────────────────── */
-const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycby3SvC3IRJ3XUaLvzf5ilwrmRqFkzcG7kPe3nJnket-9vOBQ3pLZV2Z7YYp7s5XQH45/exec'; // 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'
+const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycby_sRc5v1pBSnpgPG1LytwTniHvRob5wEs4k4dfyvP15F3WWnPDbNiSX9K3H_roZVsB/exec'; // 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'
 
 function submitRSVP(e) {
   e.preventDefault();
   const name = document.getElementById('r-name').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
   const attendEl = document.querySelector('input[name="attend"]:checked');
   if (!name) { document.getElementById('r-name').focus(); return; }
+  if (!phone) { document.getElementById('r-phone').focus(); return; }
   if (!attendEl) { alert('Vui lòng cho biết bạn có tham dự không.'); return; }
 
   const pickupSel = document.getElementById('r-pickup');
   const payload = {
     name,
+    phone,
     attend: attendEl.value,
     guests: document.getElementById('r-guests').value,
     pickup: attendEl.value === 'yes'
